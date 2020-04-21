@@ -16,8 +16,8 @@ Inspired by FAKENET-NG. Created to help analyze Agent Tesla samples which
 often use SMTP for C2.
 
 Differences from FAKENET:
-    * Only for SMTP traffic. 
-    * Captures SMTP credentials.
+* Only for SMTP traffic. 
+* Captures SMTP credentials.
 
 ## Credits
 
