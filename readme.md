@@ -1,8 +1,8 @@
 # Fakemail
 
-Simple fake SMTP server that logs requests.
+Simple fake SMTP and DNS servers.
 
-```python
+```
 ______ ___   _   __ ________  ___  ___  _____ _     
 |  ___/ _ \ | | / /|  ___|  \/  | / _ \|_   _| |    
 | |_ / /_\ \| |/ / | |__ | .  . |/ /_\ \ | | | |    
@@ -12,14 +12,16 @@ ______ ___   _   __ ________  ___  ___  _____ _
 Author: Zane Gittins (@0wlSec)
 ```
 
-Inspired by FAKENET-NG. 
+Inspired by FAKENET-NG. Created to help analyze Agent Tesla samples which
+often use SMTP for C2.
 
-Differences - Only for SMTP traffic. FAKENET-NG cannot currently be used to capture
-credentials, FAKEMAIL can.
+Differences from FAKENET:
+    * Only for SMTP traffic. 
+    * Captures SMTP credentials.
 
 ## Credits
 
-Ideas and code inspired and copied from these repos:
+Ideas and code inspired and copied from these projects:
 
 * [Fakenet-NG](https://github.com/fireeye/flare-fakenet-ng)
 * [WhiteDNS](https://github.com/Dave-ee/WhiteDNS)
