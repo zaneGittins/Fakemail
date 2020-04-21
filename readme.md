@@ -19,6 +19,15 @@ Differences from FAKENET:
 * Only for SMTP traffic. 
 * Captures SMTP credentials.
 
+## Usage
+
+```powershell
+# -l is the address to listen at.
+# -p is the port for the SMTP server.
+# -d is the port for the DNS server. Not mandatory to start DNS server.
+python3 fakemail.py -l 127.0.0.1 -p 25 -d 53
+```
+
 ## Credits
 
 Ideas and code inspired and copied from these projects:
