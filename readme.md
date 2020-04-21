@@ -15,6 +15,9 @@ Author: Zane Gittins (@0wlSec)
 Inspired by FAKENET-NG. Created to help analyze Agent Tesla samples which
 often use SMTP for C2.
 
+Since this was build with Agent Tesla in mind, this has only been tested against
+.NET SmtpClient, the SMTP server may be unstable for other SMTP clients.
+
 Differences from FAKENET:
 * Only for SMTP traffic. 
 * Captures SMTP credentials.
