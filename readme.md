@@ -15,8 +15,11 @@ Author: Zane Gittins (@0wlSec)
 Inspired by FAKENET-NG. Created to help analyze Agent Tesla samples which
 often use SMTP for C2.
 
-Since this was build with Agent Tesla in mind, this has only been tested against
-.NET SmtpClient, the SMTP server may be unstable for other SMTP clients.
+Since this was built with Agent Tesla in mind, this has only been tested against
+.NET SmtpClient, the SMTP server may be unstable for other SMTP clients. 
+
+For the DNS server to work, you must change Windows to use 127.0.0.1 as it's DNS server, 
+and you must use the ```-d 53``` switch to have the DNS server listen on port 53.
 
 Differences from FAKENET:
 * Only for SMTP traffic. 
@@ -26,9 +29,15 @@ Differences from FAKENET:
 
 ```powershell
 # -l is the address to listen at.
-# -p is the port for the SMTP server.
-# -d is the port for the DNS server. Not mandatory to start DNS server.
+# -p SMTP listen port.
+# -d DNS listen port.
 python3 fakemail.py -l 127.0.0.1 -p 25 -d 53
+```
+
+Testing:
+
+```powershell
+.\tests\Mailer.exe contoso.com 25
 ```
 
 ## Credits
