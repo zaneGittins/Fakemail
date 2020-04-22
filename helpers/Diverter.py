@@ -35,4 +35,4 @@ class DNSDiverter:
             if errors:
                 Logging.log(str(errors),self.log_file)
             else:
-                Logging.log(("[+] DNS for " + interface + " dhcp"),self.log_file)
+                Logging.log(("DNS for " + interface + " dhcp"),self.log_file)
