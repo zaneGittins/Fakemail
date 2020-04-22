@@ -13,7 +13,7 @@ class DNSClientHandler:
             ini = 12
             lon = data[ini]
             while lon != 0:
-                self.domain += str(data[ini+1:ini+lon+1])+"."
+                self.domain += (data[ini+1:ini+lon+1]).decode("utf-8")+"."
                 ini += lon + 1
                 lon = data[ini]
 
@@ -32,7 +32,7 @@ class DNSServer:
     def __init__(self, ip, port):
         self.ip = ip
         self.port = port
-        self.log_file = "dns-log.txt"
+        self.log_file = "dns-log"
     
     def start(self):
         udp_server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -42,4 +42,4 @@ class DNSServer:
             data, addr = udp_server.recvfrom(1024)
             dns_handler = DNSClientHandler(data,'127.0.0.1')
             udp_server.sendto(dns_handler.response(), addr)
-            Logging.log((f"[+] {dns_handler.domain} -> {self.ip}"),self.log_file)
+            Logging.log((f"{dns_handler.domain} -> {self.ip}"),self.log_file)

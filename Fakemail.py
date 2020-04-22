@@ -2,6 +2,7 @@
 # FAKEMAIL
 # Author: Zane Gittins (@0wlSec)
 # Date: 4/22/2020
+# netsh interface ip set dns name="Local Area Connection" static 4.2.2.2
 
 import sys
 import argparse
@@ -11,12 +12,13 @@ import time
 from signal import signal, SIGINT
 from listeners import DNSListener
 from listeners import SMTPListener
+from helpers import Diverter
 
-smtp_server = None
+dns_diverter = None
 
 def handler(signal_received, frame):
+    dns_diverter.restore_interfaces()
     print('Shutting down...')
-    smtp_server.stop()
     exit(0)
 
 if __name__ == "__main__":
@@ -55,6 +57,9 @@ if __name__ == "__main__":
             dns_thread = threading.Thread(target=dns_server.start)
             dns_thread.daemon = True
             dns_thread.start()
+
+            dns_diverter = Diverter.DNSDiverter('127.0.0.1')
+            dns_diverter.divert_interfaces()
        
     else:
         print(parser.print_help())

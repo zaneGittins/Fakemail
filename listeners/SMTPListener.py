@@ -12,7 +12,7 @@ class SMTPClientHandler(object):
         self.connection         = connection
         self.command            = ""
         self.smtp_commands = ['HELO', 'EHLO', 'MAIL', 'RCPT', 'DATA', 'AUTH', 'NOOP', 'RSET', 'QUIT', 'DATA']
-        self.log_file           = "smtp-log.txt"
+        self.log_file           = "smtp-log"
         
     def connection_send(self, data):
         end_data = "\r\n"
@@ -123,7 +123,6 @@ class SMTPServer:
         self.listen_port     = listen_port
         self.listen_address  = listen_address
         self.data_port       = None
-        self.threads         = []
         self.timeout         = 600
         self.recv_buffer     = 4096
 
@@ -137,24 +136,7 @@ class SMTPServer:
         while True:
 
             connection, address = sock.accept()
-
             smtp_client_handler = SMTPClientHandler(self, connection, address)
-
-            thread = threading.Thread(target=smtp_client_handler.handle_connection)
-            thread.start()
-            
-            self.threads.append((thread, (time.time() + (self.timeout))))
-
-            for thread, timeout in self.threads:
-                if time.time() > timeout and thread != None:
-                    try:
-                        self.threads.remove((thread,timeout))
-                        thread.terminate()
-                    except Exception:
-                        pass
-    
-    def stop(self):
-        for thread, timeout in self.threads:
-            self.threads.remove((thread,timeout))
-            thread.terminate()
-        exit(0)
+            smtp_client_thread = threading.Thread(target=smtp_client_handler.handle_connection)
+            smtp_client_thread.daemon = True
+            smtp_client_thread.start()

@@ -18,8 +18,8 @@ often use SMTP for C2.
 Since this was built with Agent Tesla in mind, this has only been tested against
 .NET SmtpClient, the SMTP server may be unstable for other SMTP clients. 
 
-For the DNS server to work, you must change Windows to use 127.0.0.1 as it's DNS server, 
-and you must use the ```-d 53``` switch to have the DNS server listen on port 53.
+For the DNS server to function on Windows you must use the ```-d 53``` argument to have the DNS server listen on port 53.
+Fakemail will automatically configure and restore DNS using netsh.
 
 Differences from FAKENET:
 * Only for SMTP traffic. 
